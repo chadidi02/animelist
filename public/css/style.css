@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Finger+Paint&family=Source+Code+Pro:wght@200;300;400&display=swap");
 * {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -30,11 +31,21 @@ body {
 			rgba(0, 0, 0, 0.002) 98.2%,
 			transparent 100%
 		),
-		url(/src/images/wallpapers.jpg);
+		url(/public/images/pexels-pixabay-531321.jpg);
 	background-size: cover;
 	width: 100%;
 	/* filter: blur(5px); */
 	height: 100vh;
+}
+
+.title {
+	font-family: "Finger Paint", cursive;
+	font-size: 140px;
+	color: #f4f5f6;
+}
+.des {
+	font-family: "Source Code Pro", monospace;
+	font-size: 16px;
 }
 
 .header {
@@ -89,18 +100,8 @@ body {
 
 .menu__brand,
 .menu__list {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-ms-flex-flow: column wrap;
-	flex-flow: column wrap;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
 	align-items: center;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
 	justify-content: center;
 	float: left;
 	width: 100%;
@@ -112,7 +113,6 @@ body {
 	margin: 0;
 	padding: 0;
 	background: #000;
-	/*mix(black, $primary-color, 20); */
 	list-style-type: none;
 	-webkit-transform: translate3d(0, -100%, 0);
 	transform: translate3d(0, -100%, 0);
@@ -143,6 +143,7 @@ body {
 	transform: translate3d(500px, 0, 0);
 	-webkit-transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 	transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+	padding: 0 50px;
 }
 
 .menu__item--active {
