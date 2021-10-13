@@ -1,5 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
 	entry: "./src/index.js",
@@ -7,13 +10,13 @@ module.exports = {
 		filename: "main.[contenthash].js",
 		path: path.resolve(__dirname, "dist"),
 	},
-	mode: "development",
+	mode: "production",
 	devtool: false,
 	module: {
 		rules: [
 			{
 				test: /\.css$/,
-				use: ["style-loader", "css-loader"],
+				use: [MiniCssExtractPlugin.loader, "css-loader"],
 			},
 			{
 				test: /\.html$/,
@@ -42,9 +45,25 @@ module.exports = {
 	},
 
 	plugins: [
-		new CleanWebpackPlugin(),
-		new HtmlWebpackPlugin({
-			template: "./src/public/index.html",
+		new MiniCssExtractPlugin({
+			filename: "[name].[contenthash].css",
+		}),
+		new CleanWebpackPlugin({
+			cleanOnceBeforeBuildPatterns: [path.join(__dirname, "dist/**/*")],
 		}),
 	],
+	optimization: {
+		minimizer: [
+			new CssMinimizerPlugin(),
+			new TerserPlugin(),
+			new HtmlWebpackPlugin({
+				template: "./src/public/index.html",
+				minify: {
+					removeComments: true,
+					removeAttributeQuotes: true,
+					collapseWhitespace: true,
+				},
+			}),
+		],
+	},
 };
